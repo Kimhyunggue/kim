@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> 김경무 : 택시 찾기 </title>
+  <meta charset = "utf-8">
+</head>
+
+<body>
+  <h1>택시 찾기</h1>
+	<form action="form.php">
+		<fieldset>
+			<legend>택시 정보 입력</legend>
+			<label>출발지 <input type="text" name="start" id="start" size="10" required></label>
+			<label>도착지<input type="text" name="arrival" id="arrival" size="10"required></label>
+			<label>거리<input type="number" name="distance" id="distance" placeholder="m 단위 입력" size="10" required></label>
+			<br>
+			<input type="radio" name="carpool" id="carpool_y" value="carpool_yes" size="10" checked></label>
+			<label for ="carpool_y">카풀 허용
+			<input type="radio" name="carpool" id="carpool_n"  value="carpool_no" size="10" checked></label>
+			<label for ="carpool_n">카풀 비허용</label> <br>
+			<label for="memo">추가정보</label>
+			<textarea name="memo" id ="memo" cols="40" rows="4"></textarea>
+		</fieldset>
+		<br>
+		<div>
+			<input type="submit" value="택시 찾기">
+		</div>
+	</form>
+  <script>
+
+	</script>
+</body>
+<script>
+</script>
+</html>

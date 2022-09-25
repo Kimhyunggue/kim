@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김경무 : 요금정산</title>
+  <style>
+    {margin: 3px;}
+  </style>
+</head>
+<body>
+<script>
+  const person = parseInt(prompt('탑승 인원을 입력해주세요(1~4)'));
+  let money = 3300;
+  let money1,money2,money3,money4;
+  switch (person)
+  {
+	case 1:
+		let dist1 = parseInt(prompt('탑승 거리를 입력해주세요'));
+		if (dist1 <= 2000)
+		{
+			document.write("1번 탑승자 요금 : " + money);
+			break;
+		}
+		else
+		{
+			let k;
+			k = parseInt((dist1 - 2000) / 134);
+			if ((dist1 - 2000) % 134 != 0)
+			{
+				k++;
+			}
+			money += k * 100;
+			document.write("1번 요금 : " + money);
+			break;
+		}
+	case 2:
+		let dist21 = parseInt(prompt('첫 번째 인원의 탑승 거리를 입력해주세요(m 단위)'));
+		let dist22 = parseInt(prompt('두 번째 인원의 탑승 거리를 입력해주세요(m 단위)'));
+		if (dist21 < dist22)
+		{
+			document.write("초기 경로는 2번째 사람이 탄 거리보다 작을 수 없습니다.");
+			break;
+		}
+		if (dist21 <= 2000)
+		{
+			document.write("1번 요금: "+ money / 2 + " 2번 요금: "+ money / 2);
+			break;
+		}
+		else if (dist22 <= 2000)
+		{
+			money2 = money / 2;
+			let k;
+			k = parseInt((dist21 - 2000) / 134);
+			if ((dist21 - 2000) % 134 != 0)
+			{
+				k++;
+			}
+			money1 = money / 2 + k * 100;
+			document.write("1번 요금: " + money1 + " 2번 요금: " + money2);
+			break;
+		}
+		else
+		{
+			let k1, k2;
+			dist21 -= dist22;
+			k1 = parseInt((dist21 - dist22) / 134);
+			k2 = parseInt((dist22 - 2000) / 134);
+			if (dist21 % 134 != 0)
+			{
+				k1++;
+			}
+			else if ((dist22 - 2000) % 134 != 0)
+			{
+				k2++;
+			}
+			money1 = money / 2 + k1 * 100 + k2 * 50;
+			money2 = money / 2 + k2 * 50;
+			document.write("1번 요금: " + money1 + " 2번 요금: " + money2);
+			break;
+		}
+	case 3:
+		let dist31 = parseInt(prompt('첫 번째 인원의 탑승 거리를 입력해주세요(m 단위)'));
+		let dist32 = parseInt(prompt('두 번째 인원의 탑승 거리를 입력해주세요(m 단위)'));
+		let dist33 = parseInt(prompt('세 번째 인원의 탑승 거리를 입력해주세요(m 단위)'));
+		if (dist31 < dist32)
+		{
+			document.write("초기 경로는 2번째 사람이 탄 거리보다 작을 수 없습니다.");
+			break;
+		}
+		if (dist31 < dist33)
+		{
+			document.write("초기 경로는 3번째 사람이 탄 거리보다 작을 수 없습니다.");
+			break;
+		}
+		let cmp;
+		let dist = [ dist31,dist32,dist33 ];
+		// dist오름차순 정렬
+		for (let i = 0; i < 2; i++)
+		{
+			for (let j = i + 1; j < 3; j++)
+			{
+				if (dist[i] < dist[j])
+				{
+					cmp = dist[j];
+					dist[j] = dist[i];
+					dist[i] = cmp;
+				}
+			}
+		}
+		dist31 = dist[0];
+		dist32 = dist[1];
+		dist33 = dist[2];
+		if (dist31 <= 2000)
+		{
+			document.write("1번 요금: " + money / 3 + " 2번 요금: " + money / 3 + " 3번 요금: " + money / 3);
+			break;
+		}
+		else if (dist32 <= 2000)
+		{
+			let k;
+			k = parseInt((dist31 - 2000) / 134);
+			if ((dist31 - 2000) % 134 != 0)
+			{
+				k++;
+			}
+			money1 = money / 3 + k * 100;
+			money2 = money / 3;
+			money3 = money / 3;
+			document.write("1번 요금: "+ money1 + " 2번 요금: " + money2 + " 3번 요금: "+ money3);
+			break;
+		}
+		else if (dist33 <= 2000)
+		{
+			let k1, k2;
+			k1 = parseInt((dist31 - dist32) / 134);
+			k2 = parseInt((dist32 - 2000) / 134);
+			if ((dist31 - dist32) % 134 != 0)
+			{
+				k1++;
+			}
+			else if ((dist32 - 2000) % 134 != 0)
+			{
+				k2++;
+			}
+			money1 = money / 3 + k1 * 100 + k2 * 50;
+			money2 = money / 3 + k2 * 50;
+			money3 = money / 3;
+			document.write("1번 요금: "+ money1 + " 2번 요금: " + money2 + " 3번 요금: "+ money3);
+			break;
+		}
+		else
+		{
+			let k1, k2, k3, moo;
+			k1 = parseInt((dist31 - dist32) / 134);
+			k2 = parseInt((dist32 - dist33) / 134);
+			k3 = parseInt((dist33 - 2000) / 134);
+			if ((dist31 - dist32) % 134 != 0)
+			{
+				k1++;
+			}
+			else if ((dist32 - dist33) % 134 != 0)
+			{
+				k2++;
+			}
+			else if ((dist33 - 2000) % 134 != 0)
+			{
+				k3++;
+			}
+			money1 = money / 3 + k1 * 100 + k2 * 50 + parseInt(k3 * (100/3));
+			money2 = money / 3 + k2 * 50 + parseInt(k3 * (100/3));
+			money3 = money / 3 + parseInt(k3 * (100/3));
+			if ((dist31 - 2000) % 134 != 0)
+			{
+				moo = (money + (parseInt((dist31 - 2000) / 134) + 1) * 100) - (money1 + money2 + money3);
+			}
+			else
+			{
+				moo = (money + parseInt(((dist31 - 2000) / 134)) * 100) - (money1 + money2 + money3);
+			}
+			document.write("1번 요금: "+ money1 + " 2번 요금: " + money2 + " 3번 요금: "+ money3 + " 무가 쏜다: "+moo);
+			break;
+		}
+	case 4:
+		let dist41 = parseInt(prompt('첫 번째 인원의 탑승 거리를 입력해주세요(m 단위)'));
+		let dist42 = parseInt(prompt('두 번째 인원의 탑승 거리를 입력해주세요(m 단위)'));
+		let dist43 = parseInt(prompt('세 번째 인원의 탑승 거리를 입력해주세요(m 단위)'));
+		let dist44 = parseInt(prompt('네 번째 인원의 탑승 거리를 입력해주세요(m 단위)'));
+		if (dist41 < dist42)
+		{
+			document.write("초기 경로는 2번째 사람이 탄 거리보다 작을 수 없습니다.");
+			break;
+		}
+		if (dist41 < dist43)
+		{
+			document.write("초기 경로는 3번째 사람이 탄 거리보다 작을 수 없습니다.");
+			break;
+		}
+		if (dist41 < dist44)
+		{
+			document.write("초기 경로는 4번째 사람이 탄 거리보다 작을 수 없습니다.");
+			break;
+		}
+		let cmp2;
+		let dista = [ dist41,dist42,dist43,dist44 ];
+		// dist오름차순 정렬
+		for (let i = 0; i < 3; i++)
+		{
+			for (let j = i + 1; j < 4; j++)
+			{
+				if (dista[i] < dista[j])
+				{
+					cmp2 = dista[j];
+					dista[j] = dista[i];
+					dista[i] = cmp2;
+				}
+			}
+		}
+		dist41 = dista[0];
+		dist42 = dista[1];
+		dist43 = dista[2];
+		dist44 = dista[3];
+		if (dist41 <= 2000)
+		{
+			document.write("1번 요금: "+money/4+" 2번 요금: "+money/4+" 3번 요금: "+money/4+" 4번 요금: "+money / 4);
+			break;
+		}
+		else if (dist42 <= 2000)
+		{
+			let k;
+			k = parseInt((dist41 - 2000) / 134);
+			if ((dist41 - 2000) % 134 != 0)
+			{
+				k++;
+			}
+			money1 = money / 4 + k * 100;
+			money2 = money / 4;
+			money3 = money / 4;
+			money4 = money / 4;
+			document.write("1번 요금: "+ money1 + " 2번 요금: " + money2 +" 3번 요금: "+money3+" 4번 요금: "+money4);
+			break;
+		}
+		else if (dist43 <= 2000)
+		{
+			let k1, k2;
+			k1 = parseInt((dist41 - dist42) / 134);
+			k2 = parseInt((dist42 - 2000) / 134);
+			if ((dist41 - dist42) % 134 != 0)
+			{
+				k1++;
+			}
+			else if ((dist42 - 2000) % 134 != 0)
+			{
+				k2++;
+			}
+			money1 = money / 4 + k1 * 100 + k2 * 50;
+			money2 = money / 4 + k2 * 50;
+			money3 = money / 4;
+			money4 = money / 4;
+			document.write("1번 요금: "+ money1 + " 2번 요금: " + money2 +" 3번 요금: "+money3+" 4번 요금: "+money4);
+			break;
+		}
+		else if(dist44 <= 2000)
+		{
+			let k1, k2, k3, moo;
+			k1 = parseInt((dist41 - dist42) / 134);
+			k2 = parseInt((dist42 - dist43) / 134);
+			k3 = parseInt((dist43 - 2000) / 134);
+			if ((dist41 - dist42) % 134 != 0)
+			{
+				k1++;
+			}
+			else if ((dist42 - dist43) % 134 != 0)
+			{
+				k2++;
+			}
+			else if ((dist43 - 2000) % 134 != 0)
+			{
+				k3++;
+			}
+			money1 = money / 4 + k1 * 100 + k2 * 50 + parseInt(k3 * (100/3));
+			money2 = money / 4 + k2 * 50 + parseInt(k3 * (100/3));
+			money3 = money / 4 + parseInt(k3 * (100/3));
+			money4 = money / 4;
+			if ((dist41 - 2000) % 134 != 0)
+			{
+				moo = (money + ((dist41 - 2000) / 134 + 1) * 100) - (money1 + money2 + money3 + money4);
+			}
+			else
+			{
+				moo = (money + ((dist41 - 2000) / 134) * 100) - (money1 + money2 + money3 + money4);
+			}
+			document.write("1번 요금: "+ money1 + " 2번 요금: " + money2 + " 3번 요금: "+ money3 + " 4번 요금: " + money4 + " 무가 쏜다: "+moo);
+			break;
+		}
+		else
+		{
+			let k1, k2, k3, k4, moo;
+			k1 = parseInt((dist41 - dist42) / 134);
+			k2 = parseInt((dist42 - dist43) / 134);
+			k3 = parseInt((dist43 - dist44) / 134);
+			k4 = parseInt((dist44 - 2000) / 134);
+			if ((dist41 - dist42) % 134 != 0)
+			{
+				k1++;
+			}
+			else if ((dist42 - dist43) % 134 != 0)
+			{
+				k2++;
+			}
+			else if ((dist43 - dist44) % 134 != 0)
+			{
+				k3++;
+			}
+			else if ((dist44 - 2000) % 134 != 0)
+			{
+				k4++;
+			}
+			money1 = money / 4 + k1 * 100 + k2 * 50 + parseInt(k3 * (100/3)) + k4 * 25;
+			money2 = money / 4 + k2 * 50 + parseInt(k3 * (100/3)) + k4 * 25;
+			money3 = money / 4 + parseInt(k3 * (100/3)) + k4 * 25;
+			money4 = money / 4 + k4 * 25;
+			if ((dist41 - 2000) % 134 != 0)
+			{
+				moo = (money + ((dist41 - 2000) / 134 + 1) * 100) - (money1 + money2 + money3 + money4);
+			}
+			else
+			{
+				moo = (money + ((dist41 - 2000) / 134) * 100) - (money1 + money2 + money3 + money4);
+			}
+			document.write("1번 요금: "+ money1 + " 2번 요금: " + money2 + " 3번 요금: "+ money3 + " 4번 요금: " + money4 + " 무가 쏜다: "+moo);
+			break;
+		}
+		default:
+			document.write("인원 수는 1~4사이의 숫자여야합니다.");
+			break;
+  }
+</script>
+</body>
+</html>
